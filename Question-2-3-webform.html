@@ -31,28 +31,35 @@
         <div class="control">
           <!--  Connected label to input using for attribute
                 Added aria-required=true to Full name so screen readers know its required -->
-          <label for="name">Full name <span class="required">*</span></label><input id="name" name="name" type="text" aria-required="true" />
+          <label for="name">Full name <span class="required">*</span></label>
+          <input id="name" name="name" type="text" aria-required="true" />
         </div>
         <div class="control">
-            <!-- Connected label to text area using for attribute
+          <!--   Connected label to text area using for attribute
                  Added aria-required=true to biography so screen readers know its required
                  Added aria-describedby so screen readers can hear inline instructions -->
-          <label for="biography">Biography<span class="required">*</span></label><textarea id="biography" name="biography" type="text" aria-describedby="bioInfo" aria-required="true"></textarea>
-          <span id="bioInfo">Include examples on your skills in JavaScript.</span>
+          <label for="biography">Biography <span class="required">*</span></label>
+          <textarea id="biography" name="biography" aria-describedby="bioInfo" aria-required="true"></textarea>
+          <span id="bioInfo">Include examples of your skills in JavaScript.</span>
         </div>
         
-          <div>Gender</div>
-          <div class="control">
+          <!-- Turned into fieldset to make it more clear and added aria-required -->
+          <fieldset aria-required="true">
+              <legend>Gender <span class="required">*</span></legend>
+            <div class="control">
             <!-- Connected male label to input -->
-            <input id="gender_male" name="gender" type="radio" value="male" /><label for="gender_male">Male</label>
-          </div>
-          <div class="control">
-            <input id="gender_female" name="gender" type="radio" value="female" /><label for="gender_female">Female</label>
-          </div>
+              <input id="gender_male" name="gender" type="radio" value="male"/>
+              <label for="gender_male">Male</label>
+            </div>
+            <div class="control">
+            <!-- Connected female label to input -->
+              <input id="gender_female" name="gender" type="radio" value="female" />
+              <label for="gender_female">Female</label>
+            </div>
+          </fieldset>
         <div class="control">
-            <!--  Connected agbs label to input using for attribute
-                  Added aria-required=true to agbs so screen readers know its required -->
-          <input id="accept_agbs" name="accept_agbs" type="checkbox" value="1" aria-required="true"/><label for="accept_agbs">I accept the terms and conditions<span class="required">*</span></label>
+          <input id="accept_agbs" name="accept_agbs" type="checkbox" value="1" aria-required="true"/>
+          <label for="accept_agbs">I accept the terms and conditions <span class="required">*</span></label>
         </div>
         <div class="control">
           <input name="validate" type="hidden" value="1" /><input type="submit" value="Register" />
@@ -98,8 +105,8 @@
               $elementToDescribe = $input;
               $referencedElement = $input;
             }
-      // R.G. hint: fix next line ;)
-            $error = $('<a>' + message + '</a>');
+            // Made the errors accesible and point towards the relevant input when clicked, also the alert will not popup unless all inputs are valid
+            $error = $('<a href="#" class="error" id="' + input + '_description">' + message + '</a>');
             $error.click(function (e) {
               // If we rely on the link's href pointing to the input's ID, it doesn't trigger forms mode in screen readers
               $referencedElement.focus();
